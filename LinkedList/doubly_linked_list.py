@@ -4,7 +4,13 @@ class Node:
         self.next = next
         self.prev = prev
 
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.count = 0
+    
+# Define the order to implement functions next time!
+
+
+    
