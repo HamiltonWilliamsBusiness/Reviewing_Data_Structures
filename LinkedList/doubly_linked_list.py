@@ -10,7 +10,8 @@ class DoublyLinkedList:
         self.tail = None
         self.count = 0
     
-# Define the order to implement functions next time!
+# Define the order to implement functions next time! Just leave 
+# Do it my leaving the function declarations and nothing else!
 
 
     
