@@ -14,8 +14,13 @@ class DoublyLinkedList:
     # Do it my leaving the function declarations and nothing else!
         
     def print_forward(self):
-        # This method prints list in forward direction. Use node.next
-        pass
+        itr = self.head
+        while True: 
+            if itr.next == None:
+                print(itr.data)
+                break
+            print(itr.data, "--> ", end="")
+            itr = itr.next
 
     def print_backward(self):
         # Print linked list in reverse direction. Use node.prev for this.
@@ -24,8 +29,14 @@ class DoublyLinkedList:
     def get_length(self):
         pass
 
-    def insert_at_begining(self, data):
-        pass
+    def insert_at_beginning(self, data):
+        if self.count == 0:
+            self.head = self.tail = Node(data, None, None)
+            self.count = self.count + 1
+        else:
+            self.head = self.head.prev = Node(data, self.head, None)
+        self.print_forward()
+
 
     def insert_at_end(self, data):
         pass
@@ -46,4 +57,7 @@ class DoublyLinkedList:
         pass
 
 if __name__ == '__main__':
-    pass
+    DLL = DoublyLinkedList()
+    DLL.insert_at_beginning(8)
+    DLL.insert_at_beginning(9)
+    DLL.insert_at_beginning(10)
