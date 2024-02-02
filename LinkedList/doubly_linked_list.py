@@ -48,12 +48,20 @@ class DoublyLinkedList:
             self.count = self.count + 1
         else:
             self.head.prev =  self.head = Node(data, self.head, None)
+            self.count = self.count + 1
         self.print_forward()
         self.print_backward()
 
 
     def insert_at_end(self, data):
-        pass
+        if self.count == 0:
+            self.head = self.tail = Node(data, None, None)
+            self.count = self.count + 1
+        else:
+            self.tail.next = self.tail = Node(data, None, self.tail)
+            self.count = self.count + 1
+        self.print_forward()
+        self.print_backward()
 
     def insert_at(self, index, data):
         pass
@@ -75,3 +83,4 @@ if __name__ == '__main__':
     DLL.insert_at_beginning(8)
     DLL.insert_at_beginning(9)
     DLL.insert_at_beginning(10)
+    DLL.insert_at_end('Hammy')
