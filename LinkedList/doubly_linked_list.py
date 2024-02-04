@@ -40,7 +40,8 @@ class DoublyLinkedList:
             itr = itr.prev
 
     def get_length(self):
-        pass
+        return self.count
+            
 
     def insert_at_beginning(self, data):
         if self.count == 0:
@@ -64,7 +65,29 @@ class DoublyLinkedList:
         self.print_backward()
 
     def insert_at(self, index, data):
-        pass
+        if self.count == 0:
+            self.head = self.tail = Node(data, None, None)
+            self.count = self.count + 1
+            print('List is empty data was inserted at the beginning of the list!')
+            self.print_forward()
+            self.print_backward()
+            return
+        count = 0
+        if index == 0:
+            self.head.prev = Node(data, self.head, None)
+            return
+        if index == self.count:
+            self.tail.prev = Node(data, self.tail, self.tail.prev)
+            return
+        itr = self.head.next
+
+        while True:
+            if count == index:
+                itr.prev = Node(data, itr, itr.prev)
+            itr = itr.next
+            count = count + 1
+        self.print_forward()
+        self.print_backward()
 
     def remove_at(self, index):
         pass
@@ -84,3 +107,5 @@ if __name__ == '__main__':
     DLL.insert_at_beginning(9)
     DLL.insert_at_beginning(10)
     DLL.insert_at_end('Hammy')
+    # DLL.insert_at(0, "abby")
+
