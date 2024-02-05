@@ -172,7 +172,9 @@ class DoublyLinkedList:
         self.print_backward()
 
     def insert_values(self, data_list):
-        pass
+        for data in data_list:
+            self.insert_at_beginning(data)
+
 
     def insert_after_value(self, data_after, data_to_insert):
         pass
@@ -192,4 +194,5 @@ if __name__ == '__main__':
     DLL.insert_at_beginning("happy")
     DLL.remove_at(0)
     DLL.remove_at(1)
+    DLL.insert_values([1,2,3,4,5,6])
 
