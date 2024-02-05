@@ -177,7 +177,55 @@ class DoublyLinkedList:
 
 
     def insert_after_value(self, data_after, data_to_insert):
-        pass
+        # If list is empty
+        if self.count == 0:
+            self.head = self.tail = Node(data_to_insert, None, None)
+            self.count = self.count + 1
+            print('List is empty data was inserted at the beginning of the list!')
+            self.print_forward()
+            self.print_backward()
+            return
+        
+
+        # Want to replace after the head
+        if self.head.data == data_after:
+            print("This ran")
+            new_node = Node(data_to_insert, self.head.next, self.head)
+            self.head.next.prev = new_node
+            self.head.next = new_node
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count + 1
+            return
+        
+        # Want to replace after the tail
+        if self.tail.data == data_after:
+            new_node = Node(data_to_insert, None, self.tail)
+            self.tail.next = new_node
+            self.tail = new_node
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count + 1
+            return
+        
+        # Starting after the head
+        itr = self.head.next
+        count = 1
+
+        # For all other cases
+        while True:
+            if itr.data == data_after:
+                new_node = Node(data_to_insert, itr.next, itr)
+                itr.next.prev = new_node
+                itr.next = new_node
+                self.count = self.count + 1
+                break
+            itr = itr.next
+            count = count + 1
+            if count == self.count:
+                break
+        self.print_forward()
+        self.print_backward()
 
     def remove_by_value(self, data):
         pass
@@ -195,4 +243,5 @@ if __name__ == '__main__':
     DLL.remove_at(0)
     DLL.remove_at(1)
     DLL.insert_values([1,2,3,4,5,6])
+    DLL.insert_after_value(5, "yayyy")
 
