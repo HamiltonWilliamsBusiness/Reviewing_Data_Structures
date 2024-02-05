@@ -65,8 +65,7 @@ class DoublyLinkedList:
         self.print_backward()
 
     def insert_at(self, index, data):
-        print('Insert_at function')
-        print('Self.count:', self.count)
+
 
         # Input Validation
         if index < 0:
@@ -85,7 +84,6 @@ class DoublyLinkedList:
             self.print_backward()
             return
         
-        count = 2
 
         # Want to replace the head
         if index == 0:
@@ -96,7 +94,7 @@ class DoublyLinkedList:
             return
         
         # Want to replace the tail
-        if index == self.count:
+        if index == self.count - 1:
             new_node = Node(data, self.tail, self.tail.prev)
             self.tail.prev.next = new_node
             self.tail.prev = new_node
@@ -105,17 +103,17 @@ class DoublyLinkedList:
             self.count = self.count + 1
             return
         
+        # Starting after the head
         itr = self.head.next
+        count = 1
 
-
+        # For all other cases
         while True:
-            print("We are in the while true statement")
-            print("Count:", count)
             if count == index:
-                print("The if statement ran")
                 new_node = Node(data, itr, itr.prev)
                 itr.prev.next = new_node
                 itr.prev = new_node
+                self.count = self.count + 1
                 break
             itr = itr.next
             count = count + 1
@@ -125,7 +123,53 @@ class DoublyLinkedList:
         self.print_backward()
 
     def remove_at(self, index):
-        pass
+        # Input Validation
+        if index < 0:
+            print("Invalid Index, index must be positive!")
+            return
+        if index > self.count:
+            print("Invalid Index, index cannot be greater than length of linkedlist")
+            return
+        
+        # If list is empty
+        if self.count == 0:
+            print('List is empty data was inserted at the beginning of the list!')
+            return
+
+        # Want to remove the head
+        if index == 0:
+            self.head = self.head.next
+            self.head.prev = None
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count - 1
+            return
+        
+        # Want to replace the tail
+        if index == self.count - 1:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count - 1
+            return
+        
+        # Starting After The Head
+        itr = self.head.next
+        count = 1
+
+        # For all other cases
+        while True:
+            if count == index:
+                itr.prev.next = itr.next
+                itr.next.prev = itr.prev
+                break
+            itr = itr.next
+            count = count + 1
+            if count == self.count:
+                break
+        self.print_forward()
+        self.print_backward()
 
     def insert_values(self, data_list):
         pass
@@ -142,5 +186,10 @@ if __name__ == '__main__':
     DLL.insert_at_beginning(9)
     DLL.insert_at_beginning(10)
     DLL.insert_at_end('Hammy')
-    DLL.insert_at(3, "abby")
+    DLL.insert_at(1, "abby")
+    DLL.remove_at(0)
+    DLL.remove_at(3)
+    DLL.insert_at_beginning("happy")
+    DLL.remove_at(0)
+    DLL.remove_at(1)
 
