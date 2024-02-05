@@ -228,7 +228,45 @@ class DoublyLinkedList:
         self.print_backward()
 
     def remove_by_value(self, data):
-        pass
+        # If list is empty
+        if self.count == 0:
+            print('List is empty data was inserted at the beginning of the list!')
+            return
+
+        # Want to remove the head
+        if self.head.data == data:
+            self.head.next.prev = None
+            self.head = self.head.next
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count - 1
+            return
+        
+        # Want to remove the tail
+        if self.tail.data == data:
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count - 1
+            return
+        
+        # Starting After The Head
+        itr = self.head.next
+        count = 1
+
+        # For all other cases
+        while True:
+            if itr.data == data:
+                itr.prev.next = itr.next
+                itr.next.prev = itr.prev
+                break
+            itr = itr.next
+            count = count + 1
+            if count == self.count:
+                break
+        self.print_forward()
+        self.print_backward()
 
 if __name__ == '__main__':
     DLL = DoublyLinkedList()
@@ -244,4 +282,7 @@ if __name__ == '__main__':
     DLL.remove_at(1)
     DLL.insert_values([1,2,3,4,5,6])
     DLL.insert_after_value(5, "yayyy")
+    DLL.remove_by_value(6)
+    DLL.remove_by_value(8)
+    DLL.remove_by_value(3)
 
