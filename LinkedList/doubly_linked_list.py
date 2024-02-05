@@ -65,6 +65,18 @@ class DoublyLinkedList:
         self.print_backward()
 
     def insert_at(self, index, data):
+        print('Insert_at function')
+        print('Self.count:', self.count)
+
+        # Input Validation
+        if index < 0:
+            print("Invalid Index, index must be positive!")
+            return
+        if index > self.count:
+            print("Invalid Index, index cannot be greater than length of linkedlist")
+            return
+        
+        # If list is empty
         if self.count == 0:
             self.head = self.tail = Node(data, None, None)
             self.count = self.count + 1
@@ -72,20 +84,43 @@ class DoublyLinkedList:
             self.print_forward()
             self.print_backward()
             return
-        count = 0
+        
+        count = 2
+
+        # Want to replace the head
         if index == 0:
-            self.head.prev = Node(data, self.head, None)
+            self.head.prev = self.head =  Node(data, self.head, None)
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count + 1
             return
+        
+        # Want to replace the tail
         if index == self.count:
-            self.tail.prev = Node(data, self.tail, self.tail.prev)
+            new_node = Node(data, self.tail, self.tail.prev)
+            self.tail.prev.next = new_node
+            self.tail.prev = new_node
+            self.print_forward()
+            self.print_backward()
+            self.count = self.count + 1
             return
+        
         itr = self.head.next
 
+
         while True:
+            print("We are in the while true statement")
+            print("Count:", count)
             if count == index:
-                itr.prev = Node(data, itr, itr.prev)
+                print("The if statement ran")
+                new_node = Node(data, itr, itr.prev)
+                itr.prev.next = new_node
+                itr.prev = new_node
+                break
             itr = itr.next
             count = count + 1
+            if count == self.count:
+                break
         self.print_forward()
         self.print_backward()
 
@@ -107,5 +142,5 @@ if __name__ == '__main__':
     DLL.insert_at_beginning(9)
     DLL.insert_at_beginning(10)
     DLL.insert_at_end('Hammy')
-    # DLL.insert_at(0, "abby")
+    DLL.insert_at(3, "abby")
 
